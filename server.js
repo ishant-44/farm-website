@@ -66,4 +66,26 @@ app.post("/api/login", async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user || user.password !== password) {
-      return res.status(401).json({ message: "Invalid email or passwor
+      return res.status(401).json({ message: "Invalid email or password" });
+    }
+
+    res.status(200).json({ 
+      message: "✅ Login successful!", 
+      user: { _id: user._id, name: user.name, email: user.email } 
+    });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+// ---------------- Fallback Route ----------------
+// Send frontend index.html for all other routes (SPA support)
+app.get("/*", (req, res) => {
+  res.sendFile(path.join(process.cwd(), "index.html"));
+});
+
+// ---------------- Server ----------------
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server running at http://localhost:${PORT}`);
+});
