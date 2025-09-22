@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "type": "module",
   "description": "Sarita Agro Farm NGO Website",
-  "main": "backend/server.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node backend/server.js",
-    "dev": "nodemon backend/server.js"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [
     "ngo",
