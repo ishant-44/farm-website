@@ -1,0 +1,25 @@
+body {
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .nav-link {
+    color: #4b5563;
+    transition: 0.3s;
+  }
+  
+  .nav-link:hover {
+    color: #4f46e5;
+  }
+  
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #e2e8f0;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 4px;
+  }
+  

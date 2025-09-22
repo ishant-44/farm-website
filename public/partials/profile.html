@@ -1,0 +1,24 @@
+<!-- Floating Profile Button -->
+<div id="profileButton" 
+     class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg cursor-pointer text-xl font-bold hidden">
+  <!-- Initial will be injected here -->
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" 
+     class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+  <div class="bg-white rounded-lg p-6 w-80 shadow-xl relative">
+    <!-- Close button -->
+    <button id="closeProfile" 
+            class="absolute top-2 right-2 text-gray-500 hover:text-black">&times;</button>
+
+    <h2 class="text-xl font-semibold mb-4">Profile</h2>
+    <p><strong>Name:</strong> <span id="profileName"></span></p>
+    <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+    <button id="logoutBtn" 
+            class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 w-full">
+      Logout
+    </button>
+  </div>
+</div>

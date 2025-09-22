@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sarita Agro Farm - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-violet-500 shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-black">Sarita Agro Farm</a>
+      <div class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="index.html" class="nav-link text-indigo-600 font-bold">Home</a>
+        <a href="products.html" class="nav-link">Products</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link">Login/Signup</a>
+        <a href="order.html" class="nav-link">Order</a>
+      </div>
+    </nav>
+  </header>
+
+<!-- Hero Section -->
+<main class="relative w-full py-12">
+  <!-- Background Image -->
+  <img id="heroBg" 
+       class="absolute top-0 left-0 w-full h-[600px] object-cover -z-10" 
+       src="/images/farm.jpg" 
+       alt="Hero Background">
+
+  <!-- Overlay -->
+  <div class="absolute inset-0 bg-black opacity-30 -z-5"></div>
+
+  <!-- Hero Content -->
+  <div class="w-3/4 md:w-1/2 mx-auto text-center py-20 px-6 rounded-xl bg-purple-500/20 backdrop-blur-sm text-black shadow-xl relative z-1">
+    <h1 class="text-5xl md:text-6xl font-extrabold mb-4">
+      Nature’s Best, Delivered to You
+    </h1>
+    <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto">
+      Fresh, authentic, and affordable products sourced directly from local farmers.
+    </p>
+
+    <!-- Explore Button -->
+    <a href="products.html" 
+       class="inline-block px-8 py-4 bg-white text-indigo-600 rounded-full font-bold shadow-lg hover:bg-gray-100 transition">
+      Explore Products
+    </a>
+  </div>
+</main>
+
+
+  <!-- Floating Profile Button -->
+  <div id="profileButton" 
+       class="fixed bottom-6 right-6 bg-blue-600 text-white w-12 h-12 flex items-center justify-center rounded-full shadow-lg cursor-pointer text-xl font-bold">
+  </div>
+
+  <!-- Profile Modal -->
+  <div id="profileModal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg p-6 w-80 shadow-xl relative">
+      <!-- Close button -->
+      <button id="closeProfile" class="absolute top-2 right-2 text-gray-500 hover:text-black">&times;</button>
+
+      <h2 class="text-xl font-semibold mb-4">Profile</h2>
+      <p><strong>Name:</strong> <span id="profileName"></span></p>
+      <p><strong>Email:</strong> <span id="profileEmail"></span></p>
+
+      <button id="logoutBtn" 
+              class="mt-4 bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 w-full z-22">
+        Logout
+      </button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12 text-center">
+    <p>&copy; 2024 Sarita Agro Farm. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/profile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products - Village Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="../public/css/style.css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <!-- Navbar -->
+  <header class="bg-gray-200 shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-indigo-600">Village Goods</a>
+      <div class="hidden md:flex space-x-8 text-sm font-medium">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="products.html" class="nav-link text-indigo-600 font-bold">Products</a>
+        <a href="about.html" class="nav-link">About Us</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="login.html" class="nav-link">Login/Signup</a>
+        <a href="order.html" class="nav-link">Order</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Products Section -->
+  <main class="container mx-auto px-6 py-12">
+    <img id="heroBg" 
+    class="absolute top-0 left-0 w-full h-auto object-cover -z-10" 
+    src="/images/productbg.webp" 
+    alt="Hero Background">
+    <h1 class="text-4xl font-bold text-indigo-600 mb-10 text-center">Our Products</h1>
+
+    <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+      
+      <!-- Kaju -->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/kaju.jpeg" alt="Kaju" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Kaju (Cashew Nuts)</h2>
+          <p class="text-gray-600 mb-4">₹800-1000/kg</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Turmeric -->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/turmeric.webp" alt="Turmeric Powder" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Turmeric Powder</h2>
+          <p class="text-gray-600 mb-4">₹300/kg</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Mango -->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/mango.webp" alt="Mango" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Mango</h2>
+          <p class="text-gray-600 mb-4">₹3000/dozen</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+      <!-- Jackfruit -->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/jackfruit.webp" alt="Jackfruit" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Jackfruit</h2>
+          <p class="text-gray-600 mb-4">₹300/piece</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+      <!--kokam-->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/kokam1.webp" alt="Jackfruit" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Kokam</h2>
+          <p class="text-gray-600 mb-4">₹350/kg</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+      <!--agri koli masala-->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/masala.jpeg" alt="Jackfruit" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">aagri koli masala</h2>
+          <p class="text-gray-600 mb-4">₹600/kg</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+      <!--flavoured kaju-->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/masala.webp" alt="Jackfruit" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">salted/masala kaju</h2>
+          <p class="text-gray-600 mb-4">₹800-1000/kg</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+      <!--kokam juice-->
+      <div class="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-xl transition">
+        <img src="images/juice.jpeg" alt="Jackfruit" class="w-full h-48 object-cover">
+        <div class="p-6 text-center">
+          <h2 class="text-xl font-semibold mb-2">Kokam juice</h2>
+          <p class="text-gray-600 mb-4">₹500/L</p>
+          <a href="order.html" class="px-4 py-2 bg-indigo-600 text-white rounded-full hover:bg-indigo-700">Order Now</a>
+        </div>
+      </div>
+
+    </div>
+
+<script src="/js/profile.js"></script>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12 text-center">
+    <p>&copy; 2024 Village Products. All rights reserved.</p>
+  </footer>
+
+  <script src="../public/js/main.js"></script>
+  <script src="../public/js/profile.js"></script>
+
+</body>
+</html>
