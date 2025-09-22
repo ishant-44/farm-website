@@ -1,65 +1,59 @@
 import express from "express";
-import path from "path";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 
 import Order from "./models/Order.js";
 import User from "./models/User.js";
 
-// ---------------- Environment Variables ----------------
 dotenv.config();
 
-// ---------------- App Setup ----------------
 const app = express();
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-// ---------------- Middleware ----------------
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// ---------------- Static Files ----------------
-// Serve public assets (images, css, js, etc.)
-app.use(express.static(path.join(process.cwd(), "public")));
-app.use("/images", express.static(path.join(process.cwd(), "public/images")));
+// Serve static frontend
+app.use(express.static(path.join(__dirname, "frontend")));
+app.use("/images", express.static(path.join(__dirname, "public/images")));
 
-// ---------------- MongoDB Connection ----------------
+// Connect to MongoDB
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("✅ MongoDB Connected"))
   .catch(err => console.error("❌ MongoDB Error:", err));
 
-// ---------------- API Routes ----------------
-
-// Orders
+// API Routes
 app.post("/api/orders", async (req, res) => {
   try {
     const order = new Order(req.body);
     await order.save();
     res.status(201).json({ message: "✅ Order placed successfully!", order });
-  } catch (error) {
-    res.status(400).json({ error: error.message });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 
-// Signup
 app.post("/api/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists) return res.status(400).json({ message: "Email already registered" });
 
-    const user = new User({ name, email, password }); // ⚠️ password not hashed
+    const user = new User({ name, email, password }); // ⚠️ consider hashing later
     await user.save();
-
-    res.status(201).json({ 
-      message: "✅ Signup successful!", 
-      user: { _id: user._id, name: user.name, email: user.email } 
+    res.status(201).json({
+      message: "✅ Signup successful!",
+      user: { _id: user._id, name: user.name, email: user.email }
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// Login
 app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -69,23 +63,19 @@ app.post("/api/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid email or password" });
     }
 
-    res.status(200).json({ 
-      message: "✅ Login successful!", 
-      user: { _id: user._id, name: user.name, email: user.email } 
+    res.status(200).json({
+      message: "✅ Login successful!",
+      user: { _id: user._id, name: user.name, email: user.email }
     });
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
 });
 
-// ---------------- Fallback Route ----------------
-// Send frontend index.html for all other routes (SPA support)
+// Fallback to SPA index.html
 app.get("/*", (req, res) => {
-  res.sendFile(path.join(process.cwd(), "index.html"));
+  res.sendFile(path.join(__dirname, "frontend/index.html"));
 });
 
-// ---------------- Server ----------------
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+// ---------------- Export app as serverless handler ----------------
+export default app;
