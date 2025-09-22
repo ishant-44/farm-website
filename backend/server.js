@@ -22,19 +22,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------------- Static Files ----------------
 // Serve frontend files
-app.use(express.static(path.join(__dirname, "../frontend")));
+app.use(express.static(path.resolve(__dirname, "../frontend")));
 
 // Serve public assets (images, css, js, etc.)
-app.use(express.static(path.join(__dirname, "../public")));
-app.use("/images", express.static(path.join(__dirname, "../public/images")));
+app.use(express.static(path.resolve(__dirname, "../public")));
+app.use("/images", express.static(path.resolve(__dirname, "../public/images")));
 
 // ---------------- MongoDB Connection ----------------
-mongoose.connect(process.env.MONGO_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-.then(() => console.log("✅ MongoDB Connected"))
-.catch(err => console.error("❌ MongoDB Error:", err));
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB Error:", err));
 
 // ---------------- API Routes ----------------
 
@@ -87,11 +84,10 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// ---------------- Fallback Route (Express 5 safe) ----------------
-app.use((req, res, next) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"), err => {
-    if (err) next(err);
-  });
+// ---------------- Fallback Route ----------------
+// Send frontend index.html for all other routes (SPA support)
+app.get("/*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "../frontend/index.html"));
 });
 
 // ---------------- Server ----------------
