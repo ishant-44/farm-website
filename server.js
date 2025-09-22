@@ -1,6 +1,5 @@
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import dotenv from "dotenv";
@@ -13,20 +12,15 @@ dotenv.config();
 
 // ---------------- App Setup ----------------
 const app = express();
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 // ---------------- Middleware ----------------
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------------- Static Files ----------------
-// Serve frontend files
-app.use(express.static(path.resolve(__dirname, "../frontend")));
-
 // Serve public assets (images, css, js, etc.)
-app.use(express.static(path.resolve(__dirname, "../public")));
-app.use("/images", express.static(path.resolve(__dirname, "../public/images")));
+app.use(express.static(path.join(process.cwd(), "public")));
+app.use("/images", express.static(path.join(process.cwd(), "public/images")));
 
 // ---------------- MongoDB Connection ----------------
 mongoose.connect(process.env.MONGO_URI)
@@ -72,26 +66,4 @@ app.post("/api/login", async (req, res) => {
     const user = await User.findOne({ email });
 
     if (!user || user.password !== password) {
-      return res.status(401).json({ message: "Invalid email or password" });
-    }
-
-    res.status(200).json({ 
-      message: "✅ Login successful!", 
-      user: { _id: user._id, name: user.name, email: user.email } 
-    });
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-});
-
-// ---------------- Fallback Route ----------------
-// Send frontend index.html for all other routes (SPA support)
-app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../frontend/index.html"));
-});
-
-// ---------------- Server ----------------
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running at http://localhost:${PORT}`);
-});
+      return res.status(401).json({ message: "Invalid email or passwor
