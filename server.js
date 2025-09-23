@@ -8,7 +8,6 @@ import { fileURLToPath } from "url";
 import Order from "./models/Order.js";
 import User from "./models/User.js";
 
-
 dotenv.config();
 
 const app = express();
@@ -43,9 +42,10 @@ app.post("/api/signup", async (req, res) => {
   try {
     const { name, email, password } = req.body;
     const userExists = await User.findOne({ email });
-    if (userExists) return res.status(400).json({ message: "Email already registered" });
+    if (userExists)
+      return res.status(400).json({ message: "Email already registered" });
 
-    const user = new User({ name, email, password }); // ⚠️ later hash this
+    const user = new User({ name, email, password }); // ⚠️ hash later
     await user.save();
 
     res.status(201).json({
@@ -76,8 +76,9 @@ app.post("/api/login", async (req, res) => {
 });
 
 // ---------------- SPA Fallback ----------------
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "frontend/index.html"));
+// ⚡ Fix catch-all route for Vercel
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "index.html"));
 });
 
 // ---------------- Export for Vercel ----------------
