@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const res = await fetch("/api/auth?action=signup", { // updated endpoint
+        const res = await fetch("/api/signup", {  // <-- updated endpoint
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = Object.fromEntries(new FormData(loginForm).entries());
 
       try {
-        const res = await fetch("/api/auth?action=login", { // updated endpoint
+        const res = await fetch("/api/login", {  // <-- updated endpoint
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
