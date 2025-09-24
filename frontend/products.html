@@ -9,10 +9,11 @@
 </head>
 <body class="bg-gray-100 text-gray-800">
 
-  <!-- Navbar -->
   <header class="bg-gray-200 shadow-md sticky top-0 z-50">
     <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold text-indigo-600">Village Goods</a>
+      <a href="index.html" class="text-2xl font-bold text-indigo-600">Sarita Agro Farm</a>
+      
+      <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-8 text-sm font-medium">
         <a href="index.html" class="nav-link">Home</a>
         <a href="products.html" class="nav-link text-indigo-600 font-bold">Products</a>
@@ -21,8 +22,24 @@
         <a href="login.html" class="nav-link">Login/Signup</a>
         <a href="order.html" class="nav-link">Order</a>
       </div>
+  
+      <!-- Mobile Menu Button -->
+      <button id="menu-button" class="md:hidden flex items-center px-3 py-2 border rounded text-gray-600 border-gray-600">
+        <svg class="fill-current h-6 w-6" viewBox="0 0 20 20"><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
+      </button>
     </nav>
+  
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-gray-200 px-6 pb-4 space-y-2">
+      <a href="index.html" class="block nav-link">Home</a>
+      <a href="products.html" class="block nav-link text-indigo-600 font-bold">Products</a>
+      <a href="about.html" class="block nav-link">About Us</a>
+      <a href="contact.html" class="block nav-link">Contact</a>
+      <a href="login.html" class="block nav-link">Login/Signup</a>
+      <a href="order.html" class="block nav-link">Order</a>
+    </div>
   </header>
+  
 
   <!-- Products Section -->
   <main class="container mx-auto px-6 py-12">
