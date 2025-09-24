@@ -1,4 +1,3 @@
-// main.js
 document.addEventListener("DOMContentLoaded", () => {
   // ---------------- Mobile menu toggle ----------------
   const menuBtn = document.getElementById("menu-button");
@@ -43,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       try {
-        const res = await fetch("/api/signup", {
+        const res = await fetch("/api/auth?action=signup", { // updated endpoint
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const formData = Object.fromEntries(new FormData(loginForm).entries());
 
       try {
-        const res = await fetch("/api/login", {
+        const res = await fetch("/api/auth?action=login", { // updated endpoint
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(formData),
