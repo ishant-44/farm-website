@@ -21,10 +21,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ---------------- Static Files ----------------
-// Serve frontend files
 app.use(express.static(path.join(__dirname, "../frontend")));
-
-// Serve public assets (images, css, js, etc.)
 app.use(express.static(path.join(__dirname, "../public")));
 app.use("/images", express.static(path.join(__dirname, "../public/images")));
 
@@ -38,14 +35,29 @@ mongoose.connect(process.env.MONGO_URI, {
 
 // ---------------- API Routes ----------------
 
-// Orders
+// Create a new order
 app.post("/api/orders", async (req, res) => {
   try {
-    const order = new Order(req.body);
+    const order = new Order({ ...req.body, paymentStatus: "pending" });
     await order.save();
     res.status(201).json({ message: "✅ Order placed successfully!", order });
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+// Mark an order as paid (pseudo payment)
+app.post("/api/orders/:id/pay", async (req, res) => {
+  try {
+    const order = await Order.findById(req.params.id);
+    if (!order) return res.status(404).json({ message: "Order not found" });
+
+    order.paymentStatus = "paid";
+    await order.save();
+
+    res.json({ message: "✅ Payment successful!", order });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
   }
 });
 
@@ -87,7 +99,23 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// ---------------- Fallback Route for Frontend ----------------
+// Update order payment status
+app.patch("/api/orders/:id", async (req, res) => {
+  try {
+    const order = await Order.findByIdAndUpdate(
+      req.params.id,
+      { paymentStatus: req.body.paymentStatus },
+      { new: true }
+    );
+    if (!order) return res.status(404).json({ message: "Order not found" });
+    res.json({ message: "Payment status updated!", order });
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+});
+
+
+// ---------------- Fallback Route ----------------
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../frontend/index.html"));
 });

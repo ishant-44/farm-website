@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout - Village Products</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+  <header class="bg-gray-200 shadow-md sticky top-0 z-50">
+    <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-indigo-600">Sarita Agro Farm</a>
+    </nav>
+  </header>
+
+  <main class="container mx-auto px-6 py-16">
+    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-8">Checkout</h2>
+
+    <!-- Products List -->
+    <div id="productsList" class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8"></div>
+
+    <!-- Total Breakdown -->
+    <div class="max-w-2xl mx-auto bg-white shadow-md rounded-xl p-6 mb-8">
+      <h3 class="text-xl font-semibold mb-4">Order Summary</h3>
+      <div class="flex justify-between mb-2">
+        <span>Subtotal:</span>
+        <span id="subtotalAmount">₹0</span>
+      </div>
+      <div class="flex justify-between mb-2">
+        <span>Delivery Charges:</span>
+        <span id="deliveryCharges">₹50</span>
+      </div>
+      <div class="flex justify-between font-bold text-lg">
+        <span>Total:</span>
+        <span id="totalAmount">₹0</span>
+      </div>
+    </div>
+
+    <!-- Payment Options -->
+    <div class="max-w-2xl mx-auto bg-white shadow-md rounded-xl p-6">
+      <h3 class="text-xl font-semibold mb-4">Payment Options</h3>
+      <div class="flex flex-col space-y-4">
+        <button id="upiPayment" class="py-3 bg-green-500 text-white rounded-lg font-semibold hover:opacity-90 transition">
+          Pay via UPI
+        </button>
+        <button id="codPayment" class="py-3 bg-gray-700 text-white rounded-lg font-semibold hover:opacity-90 transition">
+          Cash on Delivery
+        </button>
+      </div>
+      <p id="paymentMessage" class="mt-4 text-center text-indigo-600 font-semibold"></p>
+    </div>
+  </main>
+
+  <footer class="bg-gray-900 text-gray-300 py-8 mt-12 text-center">
+    <p>&copy; 2024 Village Products. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Retrieve order data from localStorage
+    const orderSummary = JSON.parse(localStorage.getItem("orderSummary")) || [];
+    const orderTotal = parseInt(localStorage.getItem("orderTotal")) || 0;
+
+    const productsList = document.getElementById("productsList");
+    const subtotalAmount = document.getElementById("subtotalAmount");
+    const totalAmount = document.getElementById("totalAmount");
+    const deliveryCharges = 50; // fixed delivery
+    const paymentMessage = document.getElementById("paymentMessage");
+
+    // Display products as cards
+    orderSummary.forEach(product => {
+      const card = document.createElement("div");
+      card.className = "bg-white shadow-md rounded-lg p-4 flex justify-between items-center";
+      card.innerHTML = `
+        <div>
+          <h4 class="font-semibold text-lg">${product.name}</h4>
+          <p>Quantity: ${product.quantity}</p>
+          <p>Price: ₹${product.price} each</p>
+        </div>
+        <div class="font-semibold text-lg">₹${product.price * product.quantity}</div>
+      `;
+      productsList.appendChild(card);
+    });
+
+    // Set totals
+    subtotalAmount.textContent = `₹${orderTotal}`;
+    totalAmount.textContent = `₹${orderTotal + deliveryCharges}`;
+
+    // Payment buttons
+    document.getElementById("upiPayment").addEventListener("click", () => {
+      paymentMessage.textContent = `✅ Payment of ₹${orderTotal + deliveryCharges} successful via UPI!`;
+      paymentMessage.classList.remove("text-red-500");
+      paymentMessage.classList.add("text-green-600");
+    });
+
+    document.getElementById("codPayment").addEventListener("click", () => {
+      paymentMessage.textContent = `✅ Order confirmed! You will pay ₹${orderTotal + deliveryCharges} on delivery.`;
+      paymentMessage.classList.remove("text-red-500");
+      paymentMessage.classList.add("text-green-600");
+    });
+  </script>
+</body>
+</html>
